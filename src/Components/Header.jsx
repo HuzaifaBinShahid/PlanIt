@@ -1,9 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
-import {
-  Link
-}from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   return (
@@ -44,7 +42,10 @@ const Header = (props) => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+            >
               Search
             </button>
           </form>
