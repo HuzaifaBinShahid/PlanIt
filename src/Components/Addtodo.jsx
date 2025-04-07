@@ -1,14 +1,14 @@
-import { React, useContext } from "react";
-import { Formik, Field, Form } from "formik";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, Input, Spin } from "antd";
+import { Field, Form, Formik } from "formik";
+import { React, useContext } from "react";
 
-import { addTodo } from "../services/Todos";
 import MessageContext from "../context";
+import { addTodo } from "../services/Todos";
 
 const Addtodo = () => {
   const queryClient = useQueryClient();
-  const message = useContext(MessageContext)
+  const message = useContext(MessageContext);
 
   const {
     mutate: addTodoMutate,
@@ -38,7 +38,7 @@ const Addtodo = () => {
 
   return (
     <div className="container my-5">
-      <h3>Add a Task</h3>
+      <h3 className="text-center">Plan a New Task</h3>
 
       {addingTodo && <Spin size="large" />}
 
@@ -57,9 +57,9 @@ const Addtodo = () => {
         }}
       >
         {({ setFieldValue, errors, touched, isValid, dirty }) => (
-          <Form>
-            <div className="form-group">
-              <label htmlFor="title">Title of Task</label>
+          <Form className="d-flex flex-column w-50 mx-auto">
+            <div className="form-group d-flex flex-column mb-3">
+              <label htmlFor="title">Title</label>
               <Field
                 name="title"
                 render={({ field }) => (
@@ -68,15 +68,16 @@ const Addtodo = () => {
                     id="title"
                     placeholder="Enter task title"
                     disabled={addingTodo}
+                    className="p-2 h-8 text-base rounded-md "
                   />
                 )}
               />
               {touched.title && errors.title && (
-                <div style={{ color: "red" }}>{errors.title}</div>
+                <div className="text-danger small mt-1">{errors.title}</div>
               )}
             </div>
 
-            <div className="form-group">
+            <div className="form-group d-flex flex-column mb-3">
               <label htmlFor="description">Description</label>
               <Field
                 name="description"
@@ -86,15 +87,19 @@ const Addtodo = () => {
                     id="description"
                     placeholder="Enter task description"
                     disabled={addingTodo}
+                    className="p-2 h-8 text-base rounded-md"
                   />
                 )}
               />
               {touched.description && errors.description && (
-                <div style={{ color: "red" }}>{errors.description}</div>
+                <div className="text-danger small mt-1">
+                  {errors.description}
+                </div>
               )}
             </div>
 
             <Button
+            className="w-25 mx-auto"
               type="primary"
               htmlType="submit"
               disabled={addingTodo || !dirty || !isValid}

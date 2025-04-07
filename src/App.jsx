@@ -46,7 +46,7 @@ function App() {
     <MessageContext.Provider value={messageApi}>
       {contextHolder}
       <Router>
-        <Header title="Todos List" searchBar={false} />
+        <Header title="PlanIt" searchBar={false} />
         <Routes>
           <Route
             path="/"
