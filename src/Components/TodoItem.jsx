@@ -14,7 +14,7 @@ const TodoItem = ({ todo }) => {
     mutationKey: ["deleteTodo"],
     mutationFn: deleteTodo,
     onSuccess: () => {
-      message.success("Todo Deleted Success");
+      message.success("Todo Deleted Successfully");
       queryClient.invalidateQueries(["getAllTodos"]);
     },
   });
@@ -24,24 +24,41 @@ const TodoItem = ({ todo }) => {
   };
 
   return (
-    <>
-      <div>
-        <div className="flex">
-          <h4>{todo.title}</h4>
-          <p>{todo.description}</p>
-        </div>
-        <p>{moment(todo.time).format("DD-MM-YYYY hh:mm A")}</p>
-      </div>
-      <button
-        className="btn btn-sm btn-danger"
-        onClick={() => handleDelete(todo)}
-        disabled={deletingTodo}
+    <div className="card m-3" style={{ height: "300px" }}>
+      <div
+        className="card-body text-dark d-flex flex-column"
+        style={{
+          backgroundColor: "#F8F4E1",
+          overflow: "hidden",
+        }}
       >
-        {deletingTodo ? <Spin size="small" /> : "Delete"}
-      </button>
+        <div
+        className="scrollable-content"
+          style={{
+            overflowY: "auto",
+            flex: "1 1 auto",
+            marginBottom: "1rem",
+          }}
+        >
+          
+          <h5 className="card-title">{todo.title}</h5>
+          <h6 className="card-subtitle py-2 text-muted">{todo.description}</h6>
+        </div>
 
-      <hr />
-    </>
+        <div>
+          <p className="card-text text-sm">
+            {moment(todo.time).format("dddd (DD-MM-YYYY) hh:mm A")}
+          </p>
+          <button
+            className="btn btn-sm btn-danger w-100"
+            onClick={() => handleDelete(todo)}
+            disabled={deletingTodo}
+          >
+            {deletingTodo ? <Spin size="small" /> : "Delete"}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

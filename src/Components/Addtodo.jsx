@@ -68,7 +68,7 @@ const Addtodo = () => {
                     id="title"
                     placeholder="Enter task title"
                     disabled={addingTodo}
-                    className="p-2 h-8 text-base rounded-md "
+                    className="custom-input py-3 text-base rounded-md bg-transparent text-white"
                   />
                 )}
               />
@@ -83,12 +83,13 @@ const Addtodo = () => {
                 name="description"
                 render={({ field }) => (
                   <Input
-                    {...field}
-                    id="description"
-                    placeholder="Enter task description"
-                    disabled={addingTodo}
-                    className="p-2 h-8 text-base rounded-md"
-                  />
+                  {...field}
+                  id="description"
+                  placeholder="Enter task description"
+                  disabled={addingTodo}
+                  className="custom-input py-3 text-base rounded-md bg-transparent text-white"
+                />
+                
                 )}
               />
               {touched.description && errors.description && (
@@ -99,10 +100,9 @@ const Addtodo = () => {
             </div>
 
             <Button
-            className="w-25 mx-auto"
+              className="w-25 mx-auto"
               type="primary"
               htmlType="submit"
-              disabled={addingTodo || !dirty || !isValid}
             >
               {addingTodo ? "Adding..." : "Add a Task"}
             </Button>

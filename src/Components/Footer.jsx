@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-dark text-light py-3" style={footerStyle}>
-      <p className="text-center my-3">Copyright &copy; My TodosList.com</p>
+      <p className="text-center my-3">Copyright &copy; PlanIt</p>
     </footer>
   );
 };
