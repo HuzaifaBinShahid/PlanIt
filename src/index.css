@@ -37,3 +37,46 @@ code {
 .scrollable-content::-webkit-scrollbar {
   display: none;
 }
+
+.nav-icon-link {
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  text-decoration: none !important;
+}
+
+.icon-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin: 10px 0;
+}
+
+.icon-container svg {
+  font-size: 20px;
+}
+
+.icon-text {
+  padding-left: 12px;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  color: white;
+}
+
+.nav-icon-link:hover .icon-container {
+  transform: scale(1.1);
+}
+
+.nav-icon-link:hover .icon-text {
+  transform: translateX(0);
+  opacity: 1;
+}
+
