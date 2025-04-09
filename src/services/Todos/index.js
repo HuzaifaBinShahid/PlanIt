@@ -1,12 +1,15 @@
 import axios from "axios";
 
-export const fetchTodos = async () => {
-  const { data } = await axios.get("https://plan-it-backend-drab.vercel.app/api/todos");
+export const fetchTodos = async ({ queryKey }) => {
+  const [_key, searchText] = queryKey;
+  const { data } = await axios.get(
+    `http://localhost:5000/api/todos?searchKey=${searchText || ""}`
+  );
   return data;
 };
 
 export const addTodo = async (title, description) => {
-  const response = await axios.post("https://plan-it-backend-drab.vercel.app/api/todos/addTodo", {
+  const response = await axios.post("http://localhost:5000/api/todos/addTodo", {
     title: title,
     description: description,
   });
@@ -15,6 +18,6 @@ export const addTodo = async (title, description) => {
 };
 
 export const deleteTodo = async (id) => {
-    const response = await axios.delete(`https://plan-it-backend-drab.vercel.app/api/todos/deleteTodo/${id}`);
+    const response = await axios.delete(`http://localhost:5000/api/todos/deleteTodo/${id}`);
     return response.data;
   };
