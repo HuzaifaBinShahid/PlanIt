@@ -12,36 +12,6 @@ import MessageContext from "./context";
 function App() {
   const [messageApi, contextHolder] = message.useMessage();
 
-  let initTodo;
-
-  if (localStorage.getItem("todos") === null) {
-    initTodo = [];
-  } else {
-    initTodo = JSON.parse(localStorage.getItem("todos"));
-  }
-
-  const onDelete = (todo) => {
-    setTodos(todos.filter((e) => e !== todo));
-    localStorage.setItem("todos", JSON.stringify(todos));
-  };
-
-  const addTodo = (title, desc) => {
-    let sno = todos.length === 0 ? 1 : todos[todos.length - 1].sno + 1;
-
-    const myTodos = {
-      sno: sno,
-      title: title,
-      desc: desc,
-    };
-    setTodos([...todos, myTodos]);
-  };
-
-  const [todos, setTodos] = useState(initTodo);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
   return (
     <MessageContext.Provider value={messageApi}>
       {contextHolder}
@@ -52,8 +22,8 @@ function App() {
             path="/"
             element={
               <>
-                <Addtodo addTodo={addTodo} />
-                <Todos todos={todos} onDelete={onDelete} />
+                <Addtodo />
+                <Todos />
               </>
             }
           />
