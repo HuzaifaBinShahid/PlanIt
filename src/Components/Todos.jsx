@@ -52,7 +52,7 @@ const Todos = () => {
     <>
       <h3 class="my-3 text-center">Todos List</h3>
       <div className="container my-3 " style={myStyle}>
-        <div className="w-25 mx-auto">
+        <div className="w-25 mx-auto my-5">
           <Space direction="vertical">
             <Search
               placeholder="input search text"
