@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchTodos = async ({ queryKey }) => {
-  const [_key, searchText] = queryKey;
+  const [, searchText] = queryKey;
   const { data } = await axios.get(
     `http://localhost:5000/api/todos?searchKey=${searchText || ""}`
   );
