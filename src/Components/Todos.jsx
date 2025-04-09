@@ -50,7 +50,7 @@ const Todos = () => {
 
   return (
     <>
-      <h3 class="my-3 text-center">Todos List</h3>
+      <h3 className="my-3 text-center">Todos List</h3>
       <div className="container my-3 " style={myStyle}>
         <div className="w-25 mx-auto my-5">
           <Space direction="vertical">
@@ -97,7 +97,7 @@ const Todos = () => {
             TodosList?.length > 0 &&
             TodosList.map((todo) => {
               return (
-                <div className="col-md-4 mb-4" key={todo.sno}>
+                <div className="col-md-4 mb-4" key={todo._id}>
                   <TodoItem todo={todo} />
                 </div>
               );

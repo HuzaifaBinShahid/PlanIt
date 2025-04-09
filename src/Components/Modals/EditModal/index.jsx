@@ -14,7 +14,7 @@ const EditModal = ({
     return (
         <Modal
         title="Edit Todos"
-        visible={isModalVisible}
+        open={isModalVisible}
         onOk={handleEdit}
         onCancel={handleCancel}
         confirmLoading={isEditing}

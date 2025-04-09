@@ -58,9 +58,8 @@ const Addtodo = () => {
           <Form className="d-flex flex-column w-50 mx-auto">
             <div className="form-group d-flex flex-column mb-3">
               <label htmlFor="title">Title</label>
-              <Field
-                name="title"
-                render={({ field }) => (
+              <Field name="title">
+                {({ field }) => (
                   <Input
                     {...field}
                     id="title"
@@ -69,7 +68,7 @@ const Addtodo = () => {
                     className="custom-input py-3 text-base rounded-md bg-transparent text-white"
                   />
                 )}
-              />
+              </Field>
               {touched.title && errors.title && (
                 <div className="text-danger small mt-1">{errors.title}</div>
               )}
@@ -77,19 +76,17 @@ const Addtodo = () => {
 
             <div className="form-group d-flex flex-column mb-3">
               <label htmlFor="description">Description</label>
-              <Field
-                name="description"
-                render={({ field }) => (
+              <Field name="description">
+                {({ field }) => (
                   <Input
-                  {...field}
-                  id="description"
-                  placeholder="Enter task description"
-                  disabled={addingTodo}
-                  className="custom-input py-3 text-base rounded-md bg-transparent text-white"
-                />
-                
+                    {...field}
+                    id="description"
+                    placeholder="Enter task description"
+                    disabled={addingTodo}
+                    className="custom-input py-3 text-base rounded-md bg-transparent text-white"
+                  />
                 )}
-              />
+              </Field>
               {touched.description && errors.description && (
                 <div className="text-danger small mt-1">
                   {errors.description}
@@ -97,11 +94,7 @@ const Addtodo = () => {
               )}
             </div>
 
-            <Button
-              className="w-25 mx-auto"
-              type="primary"
-              htmlType="submit"
-            >
+            <Button className="w-25 mx-auto" type="primary" htmlType="submit">
               {addingTodo ? "Adding..." : "Add a Task"}
             </Button>
           </Form>
