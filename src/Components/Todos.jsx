@@ -30,10 +30,7 @@ const Todos = () => {
   return (
     <>
       <h3 class="my-3 text-center">Todos List</h3>
-      <div
-        className="container my-3 "
-        style={myStyle}
-      >
+      <div className="container my-3 " style={myStyle}>
         <div className="row w-100 d-flex justify-content-center">
           {todosLoading && (
             <div style={{ textAlign: "center", padding: "50px" }}>
@@ -43,7 +40,11 @@ const Todos = () => {
 
           {isError && (
             <div style={{ textAlign: "center", padding: "50px" }}>
-              <Empty description="Failed to load tasks" />
+              <Empty
+                description={
+                  <span className="text-white">Failed to load tasks</span>
+                }
+              />
             </div>
           )}
 
