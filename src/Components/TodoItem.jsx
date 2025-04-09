@@ -10,7 +10,7 @@ const TodoItem = ({ todo }) => {
   const queryClient = useQueryClient();
   const message = useContext(MessageContext);
 
-  const { mutate: deleteTodoMutate, isLoading: deletingTodo } = useMutation({
+  const { mutate: deleteTodoMutate, isPending: deletingTodo } = useMutation({
     mutationKey: ["deleteTodo"],
     mutationFn: deleteTodo,
     onSuccess: () => {

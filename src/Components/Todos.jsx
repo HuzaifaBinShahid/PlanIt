@@ -10,7 +10,7 @@ const Todos = () => {
   const message = useContext(MessageContext);
   const {
     data: TodosList,
-    isLoading: todosLoading,
+    isPending: todosLoading,
     isError,
   } = useQuery({
     queryKey: ["getAllTodos"],
@@ -26,6 +26,8 @@ const Todos = () => {
   let myStyle = {
     minHeight: "70vh",
   };
+
+  console.log("todosLoading", todosLoading)
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button, Input, Spin } from "antd";
+import { Button, Input } from "antd";
 import { Field, Form, Formik } from "formik";
 import { React, useContext } from "react";
 
@@ -12,7 +12,7 @@ const Addtodo = () => {
 
   const {
     mutate: addTodoMutate,
-    isLoading: addingTodo,
+    isPending: addingTodo,
     isError,
   } = useMutation({
     mutationKey: ["addTodo"],
@@ -39,8 +39,6 @@ const Addtodo = () => {
   return (
     <div className="container my-5">
       <h3 className="text-center">Plan a New Task</h3>
-
-      {addingTodo && <Spin size="large" />}
 
       <Formik
         initialValues={initialValues}
