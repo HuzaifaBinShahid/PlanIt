@@ -36,3 +36,10 @@ export const deleteTodo = async (id) => {
   );
   return response.data;
 };
+
+export const togglePinTodo = async (id) => {
+  const response = await axios.post(
+    `https://plan-it-backend-drab.vercel.app/api/todos/pinTodo/${id}`
+  );
+  return response;
+};
