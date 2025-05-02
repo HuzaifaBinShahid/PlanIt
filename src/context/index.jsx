@@ -1,6 +1,4 @@
 import { createContext } from "react";
 
-
-const MessageContext = createContext(null);
-
-export default MessageContext;
+export const MessageContext = createContext(null);
+export const TodosContext = createContext(null);

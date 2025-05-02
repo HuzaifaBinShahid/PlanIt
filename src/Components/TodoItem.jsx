@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import MessageContext from "../context";
+
 import { deleteTodo, editTodo, togglePinTodo } from "../services/Todos";
 
 import EditModal from "./Modals/EditModal";
 import TodoCardBody from "./common/cardBody";
+import { MessageContext } from "../context";
 
 const TodoItem = ({ todo }) => {
   const queryClient = useQueryClient();

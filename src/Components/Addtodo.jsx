@@ -3,12 +3,13 @@ import { Button, Input } from "antd";
 import { Field, Form, Formik } from "formik";
 import { React, useContext } from "react";
 
-import MessageContext from "../context";
 import { addTodo } from "../services/Todos";
+import { MessageContext, TodosContext } from "../context";
 
 const Addtodo = () => {
   const queryClient = useQueryClient();
   const message = useContext(MessageContext);
+  const todos = useContext(TodosContext);
 
   const {
     mutate: addTodoMutate,
@@ -36,8 +37,43 @@ const Addtodo = () => {
     resetForm();
   };
 
+  const handleExport = () => {
+    if (!todos || todos.length === 0) {
+      message.warning("No todos to export.");
+      return;
+    }
+    const headers = ["Title", "Description", "Created At"];
+    const rows = todos.map((todo) => [
+      `"${todo.title}"`,
+      `"${todo.description}"`,
+      `"${new Date(todo.createdAt).toLocaleString()}"`,
+    ]);
+
+    // Convert to CSV format
+    const csvContent = [headers, ...rows].map((e) => e.join(",")).join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "todos_export.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="container my-5">
+      <div>
+        <div
+          className="text-center mb-3 position-absolute"
+          style={{ right: 20 }}
+        >
+          <Button type="primary" onClick={handleExport}>
+            Export Todos as CSV
+          </Button>
+        </div>
+      </div>
       <h3 className="text-center">Plan a New Task</h3>
 
       <Formik

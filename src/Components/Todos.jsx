@@ -3,12 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { Empty, Input, Space, Spin } from "antd";
 import React, { useContext, useState } from "react";
 
-import MessageContext from "../context";
 import { fetchTodos } from "../services/Todos";
 import TodoItem from "./TodoItem";
+import { MessageContext } from "../context";
+
 const { Search } = Input;
 
-const Todos = () => {
+const Todos = ({ setTodosList }) => {
   const message = useContext(MessageContext);
   const [searchText, setSearchText] = useState("");
   const {
@@ -24,7 +25,7 @@ const Todos = () => {
     },
     onError: (error) => {
       message.error("Error Fetching Todos");
-    }, 
+    },
   });
 
   let myStyle = {
@@ -47,6 +48,8 @@ const Todos = () => {
     setSearchText("");
     refetch();
   };
+
+  setTodosList(TodosList);
 
   return (
     <>
