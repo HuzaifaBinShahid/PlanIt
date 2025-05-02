@@ -39,7 +39,7 @@ const TodoItem = ({ todo }) => {
     },
   });
 
-  const { mutate: togglePinMutate } = useMutation({
+  const { mutate: togglePinMutate , isPending: isTodoBeingPinned  } = useMutation({
     mutationKey: ["pinTodo"],
     mutationFn: togglePinTodo,
     onSuccess: () => {
@@ -77,6 +77,7 @@ const TodoItem = ({ todo }) => {
         onEditClick={() => setIsModalVisible(true)}
         onDelete={() => handleDelete(todo)}
         deleting={deletingTodo}
+        isTodoBeingPinned = {isTodoBeingPinned}
       />
 
       <EditModal
