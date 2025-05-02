@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="container-fluid d-flex justify-content-center align-items-center vh-100">
+    <div className="container-fluid d-flex justify-content-center align-items-center vh-100 my-5">
       <div className="glass-effect">
         <p>
           📝 <strong className="text-warning">PlanIt</strong> is a modern <strong>to-do list app</strong>{" "}
