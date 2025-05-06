@@ -30,9 +30,17 @@ export const editTodo = async ({ id, updatedData }) => {
   return response.data;
 };
 
-export const deleteTodo = async (id) => {
+export const deleteTodo = async (idOrIds) => {
+  if (Array.isArray(idOrIds)) {
+    const response = await axios.delete(
+      `https://plan-it-backend-drab.vercel.app/api/todos/deleteTodos`,
+      { data: { ids: idOrIds } }
+    );
+    return response.data;
+  }
+
   const response = await axios.delete(
-    `https://plan-it-backend-drab.vercel.app/api/todos/deleteTodo/${id}`
+    `https://plan-it-backend-drab.vercel.app/api/todos/deleteTodo/${idOrIds}`
   );
   return response.data;
 };
