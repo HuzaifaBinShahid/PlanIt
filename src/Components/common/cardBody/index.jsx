@@ -1,7 +1,7 @@
 import React from "react";
-import { Spin } from "antd";
 import moment from "moment";
-import { EditOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Spin, Checkbox, Button } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import PinToggleIcon from "../PinIcon";
 
@@ -12,54 +12,69 @@ const TodoCardBody = ({
   onDelete,
   deleting,
   isTodoBeingPinned,
+  isSelected,
+  onSelectChange,
 }) => {
   return (
     <div
       className="card-body text-dark d-flex flex-column"
-      style={{ backgroundColor: "#F8F4E1", overflow: "hidden" }}
+      style={{ backgroundColor: "#F8F4E1", position: "relative" }}
     >
-      <div className="d-flex justify-content-between">
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            padding: "8px",
-            zIndex: 1,
-          }}
-        >
-          {isTodoBeingPinned ? (
-            <Spin indicator={<LoadingOutlined spin />} />
-          ) : (
-            <PinToggleIcon isPinned={todo.isPinned} onToggle={onTogglePin} />
-          )}
-        </div>
+      <div
+        className="position-absolute"
+        style={{
+          top: 0,
+          right: 0,
+          padding: "8px",
+          zIndex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+          gap: "0.5rem",
+        }}
+      >
+        {isTodoBeingPinned ? (
+          <Spin indicator={<LoadingOutlined spin />} />
+        ) : (
+          <PinToggleIcon isPinned={todo.isPinned} onToggle={onTogglePin} />
+        )}
 
-        <div>
-          <h5 className="card-title">{todo.title}</h5>
-          <h6 className="card-subtitle py-2 text-muted">{todo.description}</h6>
-        </div>
+        <Checkbox
+          checked={isSelected}
+          onChange={(e) => onSelectChange(todo._id, e.target.checked)}
+        />
       </div>
 
-      <div className="mt-auto d-flex justify-content-between">
-        <p className="card-text text-sm mr-1">
+      <div>
+        <h5 className="card-title">{todo.title}</h5>
+        <h6 className="card-subtitle py-2 text-muted">{todo.description}</h6>
+      </div>
+
+      <div className="mt-auto d-flex justify-content-between align-items-center">
+        <p className="card-text text-sm mb-0">
           {moment(todo.time).format("ddd DD-MM-YYYY (hh:mm A)")}
         </p>
-        <div>
-          <EditOutlined
-            style={{ fontSize: "20px", cursor: "pointer" }}
-            onClick={onEditClick}
-            disabled={isTodoBeingPinned || deleting}
-          />
-        </div>
       </div>
-      <button
-        className="btn btn-sm btn-danger w-100"
-        onClick={onDelete}
-        disabled={deleting || isTodoBeingPinned}
-      >
-        {deleting ? <Spin size="small" /> : "Delete"}
-      </button>
+
+      <div className="mt-2 d-flex">
+        <Button
+          type="primary"
+          danger
+          className="w-50 mr-2"
+          onClick={onDelete}
+          disabled={deleting || isTodoBeingPinned}
+        >
+          {deleting ? <Spin size="small" /> : "Delete"}
+        </Button>
+        <Button
+          type="primary"
+          onClick={onEditClick}
+          disabled={isTodoBeingPinned || deleting}
+          className="w-50"
+        >
+          Edit
+        </Button>
+      </div>
     </div>
   );
 };
