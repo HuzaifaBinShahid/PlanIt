@@ -17,8 +17,7 @@ body::before {
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-image: 
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("../public/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,6 +41,22 @@ body::before {
 
 .custom-input::placeholder {
   color: lightgray;
+}
+
+.custom-upload .ant-upload-list-item {
+  background: rgba(255, 255, 255, 0.25) !important;
+  color: #4096ff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  padding: 1rem;
+}
+
+.custom-upload .ant-upload-list-item .anticon {
+  color: #4096ff !important;
+  font-weight: bold;
 }
 
 code {
@@ -94,4 +109,3 @@ code {
   transform: translateX(0);
   opacity: 1;
 }
-

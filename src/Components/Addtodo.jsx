@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button, Input } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Input, Upload } from "antd";
 import { Field, Form, Formik } from "formik";
 import { React, useContext } from "react";
+import Papa from "papaparse";
 
 import { addTodo } from "../services/Todos";
 import { MessageContext, TodosContext } from "../context";
@@ -49,7 +51,6 @@ const Addtodo = () => {
       `"${new Date(todo.createdAt).toLocaleString()}"`,
     ]);
 
-    // Convert to CSV format
     const csvContent = [headers, ...rows].map((e) => e.join(",")).join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -62,6 +63,32 @@ const Addtodo = () => {
     document.body.removeChild(link);
   };
 
+  const handleImport = (file) => {
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: function (results) {
+        const todos = results.data;
+
+        const validTodos = todos
+          .filter((t) => t.Title && t.Description)
+          .map((t) => ({
+            title: t.Title.trim(),
+            description: t.Description.trim(),
+          }));
+
+        if (validTodos.length === 0) {
+          message.warning("No valid todos found in the CSV.");
+          return;
+        }
+
+        validTodos.forEach((todo) => addTodoMutate(todo));
+      },
+    });
+
+    return false; // prevent auto-upload
+  };
+
   return (
     <div className="container my-5">
       <div>
@@ -70,8 +97,23 @@ const Addtodo = () => {
           style={{ right: 20 }}
         >
           <Button type="primary" onClick={handleExport}>
-            Export Todos as CSV
+            Export Plans as CSV
           </Button>
+        </div>
+        <div
+          className="text-center mb-3 position-absolute text-white"
+          style={{ right: 20, top: 40 }}
+        >
+          <Upload
+            accept=".csv"
+            showUploadList={true}
+            beforeUpload={handleImport}
+            className="custom-upload"
+          >
+            <Button icon={<UploadOutlined />} type="dashed">
+              Import Plans from CSV
+            </Button>
+          </Upload>
         </div>
       </div>
       <h3 className="text-center">Plan a New Task</h3>
